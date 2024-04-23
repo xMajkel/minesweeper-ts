@@ -42,8 +42,10 @@ export default class GameBoard{
         });
     }
 
-    public reveal(position: [number, number]): void {
+    public reveal(position: [number, number],flags: number): void {
         let cell = this.boardCells[position[0]][position[1]];
+
+        this._flagged += flags
 
         if (cell.neighbouringMines === -1) {
             this.endGame(false);
@@ -90,7 +92,7 @@ export default class GameBoard{
                 cell.className = "cell"
                 row.appendChild(cell)
 
-                const callback = (position: [number, number]) => this.reveal(position);
+                const callback = (position: [number, number],flags: number) => this.reveal(position,flags);
                 const rightClick = (position: [number, number], flags: number) => this.rightClicked(position, flags)
                 const boardCell = new BoardCell([i, j], cell, neighbouringMines, callback, rightClick)
 

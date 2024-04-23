@@ -7,14 +7,14 @@ export default class BoardCell {
     private _isRevealed: boolean = false;
     private _htmlElement: HTMLTableCellElement;
     private _neighbouringMines: number;
-    leftClick: (position: [number, number]) => void;
+    leftClick: (position: [number, number],flags: number) => void;
     rightClick: (positon: [number,number],flags: number) => void;
 
     constructor(
         position: [number, number],
         htmlElement: HTMLTableCellElement,
         neighbouringMines: number,
-        callbackLeftClick: (position: [number, number]) => void,
+        callbackLeftClick: (position: [number, number],flags: number) => void,
         callbackRightClick: (positon: [number,number],flags: number) => void,
     ) {
         this._position = position;
@@ -55,8 +55,9 @@ export default class BoardCell {
 
         }
         this._isRevealed = true;
+        const f = (this._isFlagged?-1:0)
         this._isFlagged = false;
-        this.leftClick(this._position);
+        this.leftClick(this._position,f);
     }
 
     public showAsBomb(): void{
