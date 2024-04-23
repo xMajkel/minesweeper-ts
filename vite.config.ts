@@ -1,3 +1,3 @@
 export default {
-    basename: "/minesweeper-ts",
+    base: "/minesweeper-ts/",
   }
